@@ -19,16 +19,17 @@ class MyApp(ShowBase):
         self.parentCnode = self.parent.attachNewNode(CollisionNode('pcnode'))
         self.parentCnode.node().addSolid(CollisionSphere(0, 0, 0, 1.8))
         self.fighterCnode = self.fighter.attachNewNode(CollisionNode('fcnode'))
-        self.fighterCnode.node().addSolid(CollisionSphere(0, 0, 0, 1.8))
-        self.traverser = CollisionTraverser()
-        self.traverser.traverse(self.render)
+        self.fighterCnode.node().addSolid(CollisionSphere(0, 0, 0, 1.5))
+        self.cTrav = CollisionTraverser()
+        self.cTrav.traverse(self.render)
         self.pusher = CollisionHandlerPusher()
         self.pusher.addCollider(self.fighterCnode, self.fighter)
-        self.pusher.addCollider(self.parentCnode, self.parent)
-        self.traverser.addCollider(self.fighterCnode, self.pusher)
-        self.traverser.showCollisions(self.render)
+        self.cTrav.addCollider(self.fighterCnode, self.pusher)
+        self.cTrav.showCollisions(self.render)
         self.parentCnode.show()
         self.fighterCnode.show()
+
+        
 
         x = 0
         for i in range(100):
